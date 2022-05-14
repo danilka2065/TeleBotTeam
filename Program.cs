@@ -21,7 +21,7 @@ namespace TelegramBotExperiments
             {
                 var message = update.Message; 
                 if(message.Text != null)//проверка на пустоту
-                    switch (message.Text.ToLower())
+                    switch (message.Text.ToLower())//переключатель
                     {
                         case "/start":
                         {
