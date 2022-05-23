@@ -20,7 +20,7 @@ namespace TelegramBotExperiments
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
                 var message = update.Message; 
-                if(message.Text != null)//проверка на пустоту
+                if(message.Text != null)//проверка на пустоту 1
                     switch (message.Text.ToLower())//переключатель
                     {
                         case "/start":
