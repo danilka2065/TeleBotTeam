@@ -33,6 +33,13 @@ namespace TelegramBotExperiments
                             await botClient.SendTextMessageAsync(message.Chat, "Сейчас я вам помогу");
                             return;
                         };
+                        case "/ping_random":
+                            {
+                                //var membersList = bot.GetChatAsync(message.MigrateFromChatId.Value);
+                                //membersList.
+                                await botClient.SendTextMessageAsync(message.Chat, message.MigrateFromChatId.Value.ToString());
+                                return;
+                            };
                         default:
                             {
                                 await botClient.SendTextMessageAsync(message.Chat, "Дайте мне команду (пр. /help)");
