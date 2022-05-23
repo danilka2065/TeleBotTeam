@@ -23,6 +23,11 @@ namespace TelegramBotExperiments
                 if(message.Text != null)//проверка на пустоту
                     switch (message.Text.ToLower())//переключатель
                     {
+                        case "/ping_random":
+                        {
+                                await botClient.SendTextMessageAsync(message.Chat, "");
+                                return;
+                        };
                         case "/start":
                         {
                             await botClient.SendTextMessageAsync(message.Chat, "Добро пожаловать на борт, добрый путник!");
