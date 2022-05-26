@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
-using Telegram.Bot.Exceptions;
 using VoreRandomBot;
+using TBParser;
 
 namespace TelegramBotExperiments
 {
@@ -20,40 +17,39 @@ namespace TelegramBotExperiments
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
                 var message = update.Message; 
-                if(message.Text != null)//проверка на пустоту 1
+                if(message.Text != null)//проверка на пустоту
                     switch (message.Text.ToLower())//переключатель
                     {
                         case "/start":
                         {
-                            await botClient.SendTextMessageAsync(message.Chat, "Добро пожаловать на борт, добрый путник!");
+                            await botClient.SendTextMessageAsync(message.Chat.Id, "Добро пожаловать на борт, добрый путник!");
                             return;
                         };
                         case "/help":
                         {
-                            await botClient.SendTextMessageAsync(message.Chat, "Сейчас я вам помогу");
+                            await botClient.SendTextMessageAsync(message.Chat.Id, "Сейчас я вам помогу");
                             return;
                         };
                         case "/ping_random":
                             {
-                                //var membersList = bot.GetChatAsync(message.MigrateFromChatId.Value);
-                                //membersList.
-                                await botClient.SendTextMessageAsync(message.Chat, message.MigrateFromChatId.Value.ToString());
+                                await botClient.SendTextMessageAsync(message.Chat.Id, message.Chat.Id.ToString());
+                                TBParser.ChatParser.membersParser();
                                 return;
                             };
                         default:
                             {
-                                await botClient.SendTextMessageAsync(message.Chat, "Дайте мне команду (пр. /help)");
+                                await botClient.SendTextMessageAsync(message.Chat.Id, "Дайте мне команду (пр. /help)");
                                 return;
                             }
                     } 
                 else
-                    await botClient.SendTextMessageAsync(message.Chat, "Привет-привет!!");
+                    await botClient.SendTextMessageAsync(message.Chat.Id, "Привет-привет!!");
             }
         }
 
         public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
-            // Некоторые действия
+           // Некоторые действия
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
         }
 
